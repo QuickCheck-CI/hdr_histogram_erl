@@ -1301,7 +1301,9 @@ static void init(ErlNifEnv* env)
 static int on_load(ErlNifEnv* env, void** priv_data, ERL_NIF_TERM load_info)
 {
     init(env);
-    *priv_data = (hh_ctx_t*)malloc(sizeof(hh_ctx_t));
+    ErlNifResourceType *resourceType = enif_open_resource_type(env, NULL, "hh_ctx_t", NULL, ERL_NIF_RT_CREATE, NULL);
+    //*priv_data = (hh_ctx_t*)malloc(sizeof(hh_ctx_t));
+    *priv_data = resourceType;
     return 0;
 }
 
